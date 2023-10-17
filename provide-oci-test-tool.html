@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <script type="text/javascript">
+		
+            function writeParameters(urlFullString) {
+                
+				var result = "";
+				var url = urlFullString.split("?");
+				if ( url.length < 2 ) {
+					document.writeln("No parameters in URL: ");
+					document.writeln(urlFullString);
+					return result;
+				} 
+				var params = url[1].split("&");	
+				document.writeln("<H1>List of GET parameters</H1>");
+				result = "<TABLE>";
+                for ( i = 0; i < params.length; i++) {
+					result = result + "<TR><TD style='padding: 5px'>";
+					var paramNameValue = params[i].split("=");
+					if (paramNameValue[0] == "password") {
+						paramNameValue[1] = '*****';
+					};
+					result = result + paramNameValue[0] + "</TD><TD>=</TD><TD style='padding: 5px'>" + paramNameValue[1] + "</TD></TR>";
+                    
+                }
+				result = result + "</TABLE>";
+                return result;
+            };
+
+            function writePageContent() {
+				var urlFullString = window.location.href;
+                var parametersHTML = writeParameters(urlFullString);
+				document.write(parametersHTML);
+                document.getElementsByName("my-textarea")[0].value = comment;
+            };
+
+        </script>
+    </head>
+    <body onload="writePageContent()">
+     
+
+    </body>
+</html>
