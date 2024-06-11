@@ -3,7 +3,7 @@
         <script type="text/javascript">
 		
 			var CONST_VERSION = 
-			"Version 1.13 - Target = _parent"
+			"Version 1.13 - form target from param"
 			;
 		
             function writeParameters(urlFullString) {
@@ -17,6 +17,7 @@
 				} 
 				var params = url[1].split("&");	
 				document.writeln("<H1>" + CONST_VERSION + "</H1>");
+				document.writeln("<H1>List of parameters from HTTP query:</H1>");
 				result = "<TABLE>";
                 for ( i = 0; i < params.length; i++) {
 					result = result + "<TR><TD style='padding: 5px'>";
@@ -48,9 +49,8 @@
 			alert('displayed');
 			};
 			
-			function extractHookURL() {
-				
-				var urlFullString = window.location.href;
+			function extractParameter(name) {
+			var urlFullString = window.location.href;
 				var result = "";
 				var url = urlFullString.split("?");
 				if ( url.length < 2 ) {
@@ -59,16 +59,28 @@
 				var params = url[1].split("&");	
                 for ( i = 0; i < params.length; i++) {
 				var paramNameValue = params[i].split("=");
-				if ( paramNameValue[0] == "HOOK_URL") {
-						var hookURL = paramNameValue[1];
-						var unescapedURL = unescape(hookURL);
-						return unescapedURL;
+				if ( paramNameValue[0] == name ) {
+						var paramVal = paramNameValue[1];
+						var unescapedparamVal = unescape(paramVal);
+						return unescapedparamVal;
 					};
 	            };                
 				
 				return "";
+			};
+			
+			function extractHookURL() {
+				return extractParameter("HOOK_URL");
 				
 			};
+			
+			function extractTargetParam() {
+				var targetParam = extractParameter("target");
+				if ( !targetParam ) {
+					return "_self";
+				}
+				return targetParam;
+			}
 			
 			function OnSubmitForm() {	
 			  
@@ -82,18 +94,23 @@
 				document.getElementById('hookURLID').text='test';
 			};
 			
+			
+			
 			function writePageContent() {
 				var urlFullString = window.location.href;
                 var parametersHTML = writeParameters(urlFullString);
 				document.write(parametersHTML);
 				
-			document.write("<H1>Dynamic form with new action from HOOK_URL");			
-			document.write("HOOK_URL = " + extractHookURL() );
-			document.write("<FORM target='_parent' NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
+			document.write("<H1>Dynamic form with new action from HOOK_URL</H1>");			
+			<!--document.write("HOOK_URL = " + extractHookURL() );-->>
+			document.writeln("Set form frame value: target = <input name='target' value='" + extractTargetParam() + "'/>");
+			document.write("<BR> </BR>");
+			document.write("<FORM target='" + extractTargetParam() + "' NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
 				
 			
 			
 			document.write("<table>");
+					document.write("<TR/> ");
 					document.write("<TR><TD>Input </TD><TD><input name='ORDER_TEXT' value=''/></TD></TR>");
 					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_PRODUCT_ID[1]' value='4640000002-CAT|P17'/></TD></TR>");
 					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LINE[1]' value='1'/></TD></TR>");
