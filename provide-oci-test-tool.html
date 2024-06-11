@@ -2,6 +2,8 @@
     <head>
         <script type="text/javascript">
 		
+			var CONST_VERSION = "<H1>Version 1.8 - dynamic hook url and form, list of params</H1>";
+		
             function writeParameters(urlFullString) {
                 
 				var result = "";
@@ -12,7 +14,7 @@
 					return result;
 				} 
 				var params = url[1].split("&");	
-				document.writeln("<H1>List of GET parameters ver. 1.5</H1>");
+				document.writeln(CONST_VERSION);
 				result = "<TABLE>";
                 for ( i = 0; i < params.length; i++) {
 					result = result + "<TR><TD style='padding: 5px'>";
@@ -27,12 +29,7 @@
                 return result;
             };
 
-            function writePageContent() {
-				var urlFullString = window.location.href;
-                var parametersHTML = writeParameters(urlFullString);
-				document.write(parametersHTML);
-                document.getElementsByName("my-textarea")[0].value = comment;
-            };
+            
 
 			function getInput(callback) {
 				$('#somediv').html( "<input type='button' id='mybutton' name='Click Me'></input>" );
@@ -76,9 +73,35 @@
 
 			  return true;
 			}
+			
+			function fillDefaults() {
+				document.getElementById('hookURLID').text='test';
+			};
+			
+			function writePageContent() {
+				var urlFullString = window.location.href;
+                var parametersHTML = writeParameters(urlFullString);
+				document.write(parametersHTML);
+				
+				document.write("<FORM NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
+				
+			document.write("<H1>Dynamic form with new action from hook_url");
+			document.write("<table>");
+				document.write("<tr>");
+				document.write("<TD>Param 1: </TD><TD><input name='PARAM1' value='Param 1'/></TD>");
+				document.write("</tr>");
+				document.write("<tr>");
+				document.write("<TD>hook_url: </TD><TD><input name='PARAM1' value='" + extractHookURL() + "'/></TD>");
+				document.write("</tr>");
+			document.write("</table>");
+			document.write("<input type='submit' name='submit' value='Submit' onclick='{ document.SUBMITFORM.submit(); }' />");
+			document.write("</FORM>");
+				
+                //document.getElementsByName("my-textarea")[0].value = comment;
+            };
         </script>
     </head>
-    <body onload="">
+    <body onload="writePageContent();">
 	
 	<!--<button text="PressMe" onclick="getInput(processInput)"/>-->
      <FORM NAME="SUBMITFORM"
@@ -97,6 +120,9 @@
 				</tr>
 				<tr>
 					<TD>userId: </TD><TD><input id="userId" name="userId" value="Adam" size="10"/></TD>
+				</tr>
+				<tr>
+					<TD>hook_url: </TD><TD><input id="hookURLID" name="hookURLID" value="extractHookURL();" size="10"/></TD>
 				</tr>
 			</table>
 	  <input type="submit" name="submit" value="Submit" onclick="{ document.SUBMITFORM.submit(); }" />
