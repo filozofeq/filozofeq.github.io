@@ -2,7 +2,7 @@
     <head>
         <script type="text/javascript">
 		
-			var CONST_VERSION = "<H1>Version 1.8 - dynamic hook url and form, list of params</H1>";
+			var CONST_VERSION = "Version 1.9 - Capital hook url";
 		
             function writeParameters(urlFullString) {
                 
@@ -14,7 +14,7 @@
 					return result;
 				} 
 				var params = url[1].split("&");	
-				document.writeln(CONST_VERSION);
+				document.writeln("<H1>" + CONST_VERSION + "</H1>");
 				result = "<TABLE>";
                 for ( i = 0; i < params.length; i++) {
 					result = result + "<TR><TD style='padding: 5px'>";
@@ -57,7 +57,7 @@
 				var params = url[1].split("&");	
                 for ( i = 0; i < params.length; i++) {
 				var paramNameValue = params[i].split("=");
-				if ( paramNameValue[0] == "hook_url") {
+				if ( paramNameValue[0] == "HOOK_URL") {
 						return paramNameValue[1];
 					};
 	            };                
@@ -85,13 +85,13 @@
 				
 				document.write("<FORM NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
 				
-			document.write("<H1>Dynamic form with new action from hook_url");
+			document.write("<H1>Dynamic form with new action from HOOK_URL");
 			document.write("<table>");
 				document.write("<tr>");
 				document.write("<TD>Param 1: </TD><TD><input name='PARAM1' value='Param 1'/></TD>");
 				document.write("</tr>");
 				document.write("<tr>");
-				document.write("<TD>hook_url: </TD><TD><input name='PARAM1' value='" + extractHookURL() + "'/></TD>");
+				document.write("<TD>HOOK_URL: </TD><TD><input name='PARAM1' value='" + extractHookURL() + "'/></TD>");
 				document.write("</tr>");
 			document.write("</table>");
 			document.write("<input type='submit' name='submit' value='Submit' onclick='{ document.SUBMITFORM.submit(); }' />");
@@ -107,7 +107,7 @@
      <FORM NAME="SUBMITFORM"
 		ACTION=""
 		METHOD="POST" onsubmit="OnSubmitForm();">
-			<H1>Test OCI response ver 1.7 - dynamic hook_url<H1>
+			<H1>Test OCI response ver 1.7 - dynamic HOOK_URL<H1>
 			<table>
 				<tr>
 					<TD>Param 1: </TD><TD><input name="PARAM1" value="Param 1"/></TD>
@@ -122,7 +122,7 @@
 					<TD>userId: </TD><TD><input id="userId" name="userId" value="Adam" size="10"/></TD>
 				</tr>
 				<tr>
-					<TD>hook_url: </TD><TD><input id="hookURLID" name="hookURLID" value="extractHookURL();" size="10"/></TD>
+					<TD>HOOK_URL: </TD><TD><input id="hookURLID" name="hookURLID" value="extractHookURL();" size="10"/></TD>
 				</tr>
 			</table>
 	  <input type="submit" name="submit" value="Submit" onclick="{ document.SUBMITFORM.submit(); }" />
