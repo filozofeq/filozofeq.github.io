@@ -2,7 +2,7 @@
     <head>
         <script type="text/javascript">
 		
-			var CONST_VERSION = "Version 1.10 - Decode URI for HOOK_URL";
+			var CONST_VERSION = "Version 1.10 - Unescaped URI for HOOK_URL";
 		
             function writeParameters(urlFullString) {
                 
@@ -58,7 +58,9 @@
                 for ( i = 0; i < params.length; i++) {
 				var paramNameValue = params[i].split("=");
 				if ( paramNameValue[0] == "HOOK_URL") {
-						return decodeURI(paramNameValue[1]);
+						var hookURL = paramNameValue[1];
+						var unescapedURL = unescape(hookURL);
+						return unescapedURL;
 					};
 	            };                
 				
