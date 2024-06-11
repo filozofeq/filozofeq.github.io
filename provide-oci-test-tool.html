@@ -47,16 +47,44 @@
 		
 			function display() {
 			alert('displayed');
+			};
+			
+			function extractHookURL() {
+				
+				var urlFullString = window.location.href;
+				var result = "";
+				var url = urlFullString.split("?");
+				if ( url.length < 2 ) {
+					return "";
+				} 
+				var params = url[1].split("&");	
+                for ( i = 0; i < params.length; i++) {
+				var paramNameValue = params[i].split("=");
+				if ( paramNameValue[0] == "hook_url") {
+						return paramNameValue[1];
+					};
+	            };                
+				
+				return "";
+				
+			};
+			
+			function OnSubmitForm() {	
+			  
+				hookURL = extractHookURL();
+				document.SUBMITFORM.action = hookURL;
+
+			  return true;
 			}
         </script>
     </head>
-    <body onload="writePageContent()">
+    <body onload="">
 	
 	<!--<button text="PressMe" onclick="getInput(processInput)"/>-->
      <FORM NAME="SUBMITFORM"
-		ACTION="SAPEVENT:POST"
-		METHOD="POST" onsubmit=>
-			<H1>Test OCI response ver 1.5<H1>
+		ACTION=""
+		METHOD="POST" onsubmit="OnSubmitForm();">
+			<H1>Test OCI response ver 1.7 - dynamic hook_url<H1>
 			<table>
 				<tr>
 					<TD>Param 1: </TD><TD><input name="PARAM1" value="Param 1"/></TD>
@@ -70,9 +98,8 @@
 				<tr>
 					<TD>userId: </TD><TD><input id="userId" name="userId" value="Adam" size="10"/></TD>
 				</tr>
-				User: 
 			</table>
-	  <input type="submit" onclick="{ document.SUBMITFORM.submit(); }"
+	  <input type="submit" name="submit" value="Submit" onclick="{ document.SUBMITFORM.submit(); }" />
   	</FORM>
 
     </body>
