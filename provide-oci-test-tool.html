@@ -2,7 +2,9 @@
     <head>
         <script type="text/javascript">
 		
-			var CONST_VERSION = "Version 1.10 - Unescaped URI for HOOK_URL";
+			var CONST_VERSION = 
+			"Version 1.11 - Removed form onSubmit due to error"
+			;
 		
             function writeParameters(urlFullString) {
                 
@@ -96,7 +98,7 @@
 				document.write("<TD>HOOK_URL: </TD><TD><input name='PARAM1' value='" + extractHookURL() + "'/></TD>");
 				document.write("</tr>");
 			document.write("</table>");
-			document.write("<input type='submit' name='submit' value='Submit' onclick='{ document.SUBMITFORM.submit(); }' />");
+			document.write("<input type='submit' name='submit' value='Submit' />");
 			document.write("</FORM>");
 				
                 //document.getElementsByName("my-textarea")[0].value = comment;
