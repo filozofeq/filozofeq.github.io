@@ -3,7 +3,7 @@
         <script type="text/javascript">
 		
 			var CONST_VERSION = 
-			"Version 1.11 - Removed form onSubmit due to error"
+			"Version 1.12 - New form with OCI data"
 			;
 		
             function writeParameters(urlFullString) {
@@ -87,16 +87,59 @@
                 var parametersHTML = writeParameters(urlFullString);
 				document.write(parametersHTML);
 				
-				document.write("<FORM NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
+			document.write("<H1>Dynamic form with new action from HOOK_URL");			
+			document.write("HOOK_URL = " + extractHookURL() );
+			document.write("<FORM NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
 				
-			document.write("<H1>Dynamic form with new action from HOOK_URL");
+			
+			
 			document.write("<table>");
-				document.write("<tr>");
-				document.write("<TD>Param 1: </TD><TD><input name='PARAM1' value='Param 1'/></TD>");
-				document.write("</tr>");
-				document.write("<tr>");
-				document.write("<TD>HOOK_URL: </TD><TD><input name='PARAM1' value='" + extractHookURL() + "'/></TD>");
-				document.write("</tr>");
+					document.write("<TR><TD>Input </TD><TD><input name='ORDER_TEXT' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_PRODUCT_ID[1]' value='4640000002-CAT|P17'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LINE[1]' value='1'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PARENT_ID[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ORDER_TEXT[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-VENDOR[1]' value='1100000016'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTURER_ID[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTMAT[1]' value='one1'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTCODE[1]' value='Acme Ltd'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-DESCRIPTION[1]' value='HDMI Cable'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-QUANTITY[1]' value='1.00'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-UNIT[1]' value='PCE'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_SCHEMA_TYPE[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-UNSPSC_CODE[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LONGTEXT_1:132[]' value='Extra details text for HDMI cable'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CONTRACT[1]' value='4640000002'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CONTRACT_NAME[1]' value='Test contract for D09'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_ID[1]' value='4640000002-CAT'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_NAME[1]' value='Test catalogue for D09'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SCOPE_OF_WORK[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PRICE[1]' value='10.00'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CURRENCY[1]' value='GBP'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PRICEUNIT[1]' value='1.00'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LEADTIME[1]' value='10'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-IS_LOWEST_PRICE[1]' value='YES'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_TYPE[1]' value='CAT'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-VENDORMAT[1]' value='P17'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_CATEGORY_ID[1]' value='43202222'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MATGROUP[1]' value='43202222'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SUPPLIER_DATA[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SAFETY_FLAG[1]' value='0'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CHEMICAL_FLAG[1]' value='0'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MATNR[1]' value='17'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM_PREVIEW_URL[1]' value='https://www.komplettbedrift.no/img/p/1200/1123321.jpg'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PURCHORG[1]' value='1001'/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD1[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD2[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD3[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD4[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD5[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_NCM[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_ORIGIN[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_USAGE[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_CATEGORY[1]' value=''/></TD></TR>");
+					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZTAX_CODE[1]' value=''/></TD></TR>");	
+				
 			document.write("</table>");
 			document.write("<input type='submit' name='submit' value='Submit' />");
 			document.write("</FORM>");
