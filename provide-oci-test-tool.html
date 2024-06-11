@@ -2,7 +2,7 @@
     <head>
         <script type="text/javascript">
 		
-			var CONST_VERSION = "Version 1.9 - Capital hook url";
+			var CONST_VERSION = "Version 1.10 - Decode URI for HOOK_URL";
 		
             function writeParameters(urlFullString) {
                 
@@ -58,7 +58,7 @@
                 for ( i = 0; i < params.length; i++) {
 				var paramNameValue = params[i].split("=");
 				if ( paramNameValue[0] == "HOOK_URL") {
-						return paramNameValue[1];
+						return decodeURI(paramNameValue[1]);
 					};
 	            };                
 				
