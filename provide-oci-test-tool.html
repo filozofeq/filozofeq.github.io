@@ -34,10 +34,47 @@
                 document.getElementsByName("my-textarea")[0].value = comment;
             };
 
+			function getInput(callback) {
+				$('#somediv').html( "<input type='button' id='mybutton' name='Click Me'></input>" );
+				$('#mybutton').click( function() { callback("result"); } );
+			};
+
+			function processInput (result) {
+				alert(result);
+			};
+
+			function getInput(processInput);
+		
+			function display() {
+			alert('displayed');
+			}
         </script>
     </head>
-    <body onload="writePageContent()">
-     
+    <body onload="">
+	
+	<!--<button text="PressMe" onclick="getInput(processInput)"/>-->
+       	<FORM NAME="SUBMITFORM"
+		ACTION="SAPEVENT:POST"
+		METHOD="POST" onsubmit=>
+			<H1>Test OCI response</H1>
+			<table>
+				<tr>
+					<TD>Param 1: </TD><TD><input name="PARAM1" value="Param 1"/></TD>
+				</tr>
+				<tr>
+					<TD>Param 2: </TD><TD><input name="PARAM1" value="Param 2"/></TD>
+				</tr>
+				<tr>
+					<TD>Param 3: </TD><TD><input name="PARAM1" value="Param 3"/></TD>
+				</tr>
+				<tr>
+					<TD>userId: </TD><TD><input id="userId" name="userId" value="Adam" size="10"/></TD>
+				</tr>
+				User: 
+			</table>
+	  <input type="submit" onclick="{ document.SUBMITFORM.submit(); }"
+  	</FORM>
 
     </body>
 </html>
+
