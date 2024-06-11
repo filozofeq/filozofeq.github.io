@@ -3,7 +3,7 @@
         <script type="text/javascript">
 		
 			var CONST_VERSION = 
-			"Version 1.12 - New form with OCI data"
+			"Version 1.13 - Target = _parent"
 			;
 		
             function writeParameters(urlFullString) {
@@ -89,7 +89,7 @@
 				
 			document.write("<H1>Dynamic form with new action from HOOK_URL");			
 			document.write("HOOK_URL = " + extractHookURL() );
-			document.write("<FORM NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
+			document.write("<FORM target='_parent' NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
 				
 			
 			
