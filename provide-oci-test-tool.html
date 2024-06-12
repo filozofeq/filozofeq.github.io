@@ -1,174 +1,246 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript">
+<head>
+
+	<script type="text/javascript">
+		function updateTargetValue() {
 		
-			var CONST_VERSION = 
-			"Version 1.14 - move button to top"
-			;
+// Get the value of the "action" parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+		const responseForm = document.getElementById("response-form");
 		
-            function writeParameters(urlFullString) {
-                
-				var result = "";
-				var url = urlFullString.split("?");
-				if ( url.length < 2 ) {
-					document.writeln("No parameters in URL: ");
-					document.writeln(urlFullString);
-					return result;
-				} 
-				var params = url[1].split("&");	
-				document.writeln("<H1>" + CONST_VERSION + "</H1>");
-				document.writeln("<H1>List of parameters from HTTP query:</H1>");
-				result = "<TABLE>";
-                for ( i = 0; i < params.length; i++) {
-					result = result + "<TR><TD style='padding: 5px'>";
-					var paramNameValue = params[i].split("=");
-					if (paramNameValue[0] == "password") {
-						paramNameValue[1] = '*****';
-					};
-					result = result + paramNameValue[0] + "</TD><TD>=</TD><TD style='padding: 5px' >" + paramNameValue[1] + "</TD></TR>";
-                    
-                }
-				result = result + "</TABLE>";
-                return result;
-            };
-
-            
-
-			function getInput(callback) {
-				$('#somediv').html( "<input type='button' id='mybutton' name='Click Me'></input>" );
-				$('#mybutton').click( function() { callback("result"); } );
-			};
-
-			function processInput (result) {
-				alert(result);
-			};
-
-			
 		
-			function display() {
-			alert('displayed');
-			};
-			
-			function extractParameter(name) {
-			var urlFullString = window.location.href;
-				var result = "";
-				var url = urlFullString.split("?");
-				if ( url.length < 2 ) {
-					return "";
-				} 
-				var params = url[1].split("&");	
-                for ( i = 0; i < params.length; i++) {
-				var paramNameValue = params[i].split("=");
-				if ( paramNameValue[0] == name ) {
-						var paramVal = paramNameValue[1];
-						var unescapedparamVal = unescape(paramVal);
-						return unescapedparamVal;
-					};
-	            };                
-				
-				return "";
-			};
-			
-			function extractHookURL() {
-				return extractParameter("HOOK_URL");
-				
-			};
-			
-			function extractTargetParam() {
-				var targetParam = extractParameter("target");
-				if ( !targetParam ) {
-					return "_self";
-				}
-				return targetParam;
-			}
-			
-			function OnSubmitForm() {	
-			  
-				hookURL = extractHookURL();
-				document.SUBMITFORM.action = hookURL;
-
-			  return true;
-			}
-			
-			function fillDefaults() {
-				document.getElementById('hookURLID').text='test';
-			};
-			
-			
-			
-			function writePageContent() {
-				var urlFullString = window.location.href;
-                var parametersHTML = writeParameters(urlFullString);
-				document.write(parametersHTML);
-				
-			document.write("<H1>Dynamic form with new action from HOOK_URL</H1>");			
-			<!--document.write("HOOK_URL = " + extractHookURL() );-->>
-			document.writeln("Set form frame value: target = <input name='target' value='" + extractTargetParam() + "'/>");
-			document.write("<BR> </BR>");
-			document.write("<FORM target='" + extractTargetParam() + "' NAME='SUBMITFORM' ACTION='" + extractHookURL() + "' METHOD='POST' onsubmit=''>");
-				
-			
-			document.writeln("<input type='submit' name='submit' value='Submit form' />");
-			document.write("<table>");
-					document.write("<TR/> ");
-					document.write("<TR><TD>Input </TD><TD><input name='ORDER_TEXT' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_PRODUCT_ID[1]' value='4640000002-CAT|P17'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LINE[1]' value='1'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PARENT_ID[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ORDER_TEXT[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-VENDOR[1]' value='1100000016'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTURER_ID[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTMAT[1]' value='one1'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MANUFACTCODE[1]' value='Acme Ltd'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-DESCRIPTION[1]' value='HDMI Cable'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-QUANTITY[1]' value='1.00'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-UNIT[1]' value='PCE'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_SCHEMA_TYPE[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-UNSPSC_CODE[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LONGTEXT_1:132[]' value='Extra details text for HDMI cable'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CONTRACT[1]' value='4640000002'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CONTRACT_NAME[1]' value='Test contract for D09'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_ID[1]' value='4640000002-CAT'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_NAME[1]' value='Test catalogue for D09'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SCOPE_OF_WORK[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PRICE[1]' value='10.00'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CURRENCY[1]' value='GBP'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PRICEUNIT[1]' value='1.00'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-LEADTIME[1]' value='10'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-IS_LOWEST_PRICE[1]' value='YES'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CATALOG_TYPE[1]' value='CAT'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-VENDORMAT[1]' value='P17'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-EXT_CATEGORY_ID[1]' value='43202222'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MATGROUP[1]' value='43202222'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SUPPLIER_DATA[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-SAFETY_FLAG[1]' value='0'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CHEMICAL_FLAG[1]' value='0'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-MATNR[1]' value='17'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM_PREVIEW_URL[1]' value='https://www.komplettbedrift.no/img/p/1200/1123321.jpg'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-PURCHORG[1]' value='1001'/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD1[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD2[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD3[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD4[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-CUSTFIELD5[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_NCM[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_ORIGIN[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_USAGE[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZBRAZIL_CATEGORY[1]' value=''/></TD></TR>");
-					document.write("<TR><TD>Input </TD><TD><input name='NEW_ITEM-ZTAX_CODE[1]' value=''/></TD></TR>");	
-				
-			document.write("</table>");
-			
-			document.write("</FORM>");
-				
-                //document.getElementsByName("my-textarea")[0].value = comment;
-            };
-        </script>
-    </head>
-    <body onload="writePageContent();">
+		
+        var hookURL = urlParams.get("HOOK_URL");
 	
-  	</FORM>
+		if ( !hookURL ) {
+			hookURL = '';
+		}
+        responseForm.action = hookURL;
+		responseForm.target = document.getElementById('targetInput').value;
 
-    </body>
+		};
+	</script>
+	
+    <title>OCI Response Simulator</title>
+    <style>
+        table {
+            width: 600px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>OCI Response Simulator version 2.0</h1>
+	<form target='_self' id="response-form" NAME='response-form' ACTION='' 
+		METHOD='POST' onsubmit='updateTargetValue();'>
+    <table>
+		<tr>
+			<td style="border:0px;">This page simulates an OCI server response.</td>
+			<td style="border:0px;"><input type='submit' name='submit' value='Submit form' /></td>
+		</tr>
+		<tr>
+			<td style="border:0px;">Form target attribute:</td>
+			<td style="border:0px;"><input id='targetInput' name='targetInput' value='_self' /></td>
+		</tr
+		<tr>
+			<td style="border:0px;"/>
+			<td style="border:0px;"/>
+		</tr>
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>ORDER_TEXT</td>
+            <td><input type="text" id="ORDER_TEXT" name="ORDER_TEXT" value="" readonly></td>
+        </tr>
+        <tr>
+            <td>NEW_ITEM-EXT_PRODUCT_ID[1]</td>
+            <td><input type="text" id="NEW_ITEM-EXT_PRODUCT_ID[1]" name="NEW_ITEM-EXT_PRODUCT_ID[1]" value="4640000002-CAT|P17" readonly></td>
+        </tr>
+
+		<tr>
+			<td>NEW_ITEM-LINE[1]</td>
+			<td><input type="text" id="NEW_ITEM-LINE[1]" name="NEW_ITEM-LINE[1]" value=" 1" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-PARENT_ID[1]</td>
+			<td><input type="text" id="NEW_ITEM-PARENT_ID[1]" name="NEW_ITEM-PARENT_ID[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-ORDER_TEXT[1]</td>
+			<td><input type="text" id="NEW_ITEM-ORDER_TEXT[1]" name="NEW_ITEM-ORDER_TEXT[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-VENDOR[1]: </td>
+			<td><input type="text" id="NEW_ITEM-VENDOR[1]" name="NEW_ITEM-VENDOR[1]" value="1100000016" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-MANUFACTURER_ID[1]</td>
+			<td><input type="text" id="NEW_ITEM-MANUFACTURER_ID[1]" name="NEW_ITEM-MANUFACTURER_ID[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-MANUFACTMAT[1]</td>
+			<td><input type="text" id="NEW_ITEM-MANUFACTMAT[1]" name="NEW_ITEM-MANUFACTMAT[1]" value="one1" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-MANUFACTCODE[1]</td>
+			<td><input type="text" id="NEW_ITEM-MANUFACTCODE[1]" name="NEW_ITEM-MANUFACTCODE[1]" value="Acme Ltd" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-DESCRIPTION[1]</td>
+			<td><input type="text" id="NEW_ITEM-DESCRIPTION[1]: " name="NEW_ITEM-DESCRIPTION[1]: " value="HDMI Cable" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-QUANTITY[1]</td>
+			<td><input type="text" id="NEW_ITEM-QUANTITY[1]: " name="NEW_ITEM-QUANTITY[1]" value="1.00" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-UNIT[1]</td>
+			<td><input type="text" id="NEW_ITEM-UNIT[1]" name="NEW_ITEM-UNIT[1]" value="PCE" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-EXT_SCHEMA_TYPE[1]</td>
+			<td><input type="text" id="NEW_ITEM-EXT_SCHEMA_TYPE[1]" name="NEW_ITEM-EXT_SCHEMA_TYPE[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-UNSPSC_CODE[1]</td>
+			<td><input type="text" id="NEW_ITEM-UNSPSC_CODE[1]" name="NEW_ITEM-UNSPSC_CODE[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-LONGTEXT_1:132[]</td>
+			<td><input type="text" id="NEW_ITEM-LONGTEXT_1:132[]" name="NEW_ITEM-LONGTEXT_1:132[]" value="Extra details text for HDMI cable" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CONTRACT[1]</td>
+			<td><input type="text" id="NEW_ITEM-CONTRACT[1]: " name="NEW_ITEM-CONTRACT[1]: " value="4640000002" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CONTRACT_NAME[1]</td>
+			<td><input type="text" id="NEW_ITEM-CONTRACT_NAME[1]" name="NEW_ITEM-CONTRACT_NAME[1]" value="Test contract for D09" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CATALOG_ID[1]</td>
+			<td><input type="text" id="NEW_ITEM-CATALOG_ID[1]" name="NEW_ITEM-CATALOG_ID[1]" value="4640000002-CAT" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CATALOG_NAME[1]</td>
+			<td><input type="text" id="NEW_ITEM-CATALOG_NAME[1]" name="NEW_ITEM-CATALOG_NAME[1]" value="Test catalogue for D09" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-SCOPE_OF_WORK[1]</td>
+			<td><input type="text" id="NEW_ITEM-SCOPE_OF_WORK[1]" name="NEW_ITEM-SCOPE_OF_WORK[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-PRICE[1]</td>
+			<td><input type="text" id="NEW_ITEM-PRICE[1]" name="NEW_ITEM-PRICE[1]" value="10.00" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CURRENCY[1]</td>
+			<td><input type="text" id="NEW_ITEM-CURRENCY[1]" name="NEW_ITEM-CURRENCY[1]" value="GBP" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-PRICEUNIT[1]</td>
+			<td><input type="text" id="NEW_ITEM-PRICEUNIT[1]" name="NEW_ITEM-PRICEUNIT[1]" value="1.00" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-LEADTIME[1]</td>
+			<td><input type="text" id="NEW_ITEM-LEADTIME[1]" name="NEW_ITEM-LEADTIME[1]" value="10" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-IS_LOWEST_PRICE[1]</td>
+			<td><input type="text" id="NEW_ITEM-IS_LOWEST_PRICE[1]" name="NEW_ITEM-IS_LOWEST_PRICE[1]" value="YES" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CATALOG_TYPE[1]</td>
+			<td><input type="text" id="NEW_ITEM-CATALOG_TYPE[1]" name="NEW_ITEM-CATALOG_TYPE[1]" value="CAT" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-VENDORMAT[1]</td>
+			<td><input type="text" id="NEW_ITEM-VENDORMAT[1]" name="NEW_ITEM-VENDORMAT[1]" value="P17" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-EXT_CATEGORY_ID[1]</td>
+			<td><input type="text" id="NEW_ITEM-EXT_CATEGORY_ID[1]" name="NEW_ITEM-EXT_CATEGORY_ID[1]" value="43202222" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-MATGROUP[1]</td>
+			<td><input type="text" id="NEW_ITEM-MATGROUP[1]: " name="NEW_ITEM-MATGROUP[1]: " value="43202222" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-SUPPLIER_DATA[1]</td>
+			<td><input type="text" id="NEW_ITEM-SUPPLIER_DATA[1]" name="NEW_ITEM-SUPPLIER_DATA[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-SAFETY_FLAG[1]: </td>
+			<td><input type="text" id="NEW_ITEM-SAFETY_FLAG[1]" name="NEW_ITEM-SAFETY_FLAG[1]" value="0" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CHEMICAL_FLAG[1]</td>
+			<td><input type="text" id="NEW_ITEM-CHEMICAL_FLAG[1]" name="NEW_ITEM-CHEMICAL_FLAG[1]" value="0" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-MATNR[1]: </td>
+			<td><input type="text" id="NEW_ITEM-MATNR[1]" name="NEW_ITEM-MATNR[1]" value="17" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM_PREVIEW_URL[1]</td>
+			<td><input type="text" id="EW_ITEM_PREVIEW_URL[1]" name="EW_ITEM_PREVIEW_URL[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-PURCHORG[1]: </td>
+			<td><input type="text" id="EW_ITEM-PURCHORG[1]" name="EW_ITEM-PURCHORG[1]" value="1001" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CUSTFIELD1[1]</td>
+			<td><input type="text" id="NEW_ITEM-CUSTFIELD1[1]" name="NEW_ITEM-CUSTFIELD1[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CUSTFIELD2[1]</td>
+			<td><input type="text" id="NEW_ITEM-CUSTFIELD2[1]" name="NEW_ITEM-CUSTFIELD2[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CUSTFIELD3[1]</td>
+			<td><input type="text" id="NEW_ITEM-CUSTFIELD3[1]" name="NEW_ITEM-CUSTFIELD3[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CUSTFIELD4[1]</td>
+			<td><input type="text" id="NEW_ITEM-CUSTFIELD4[1]" name="NEW_ITEM-CUSTFIELD4[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-CUSTFIELD5[1]</td>
+			<td><input type="text" id="NEW_ITEM-CUSTFIELD5" name="NEW_ITEM-CUSTFIELD5" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-ZBRAZIL_NCM[1]</td>
+			<td><input type="text" id="NEW_ITEM-ZBRAZIL_NCM[1]" name="NEW_ITEM-ZBRAZIL_NCM[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-ZBRAZIL_ORIGIN[1]</td>
+			<td><input type="text" id="NEW_ITEM-ZBRAZIL_ORIGIN[1]" name="NEW_ITEM-ZBRAZIL_ORIGIN[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-ZBRAZIL_USAGE[1]</td>
+			<td><input type="text" id="NEW_ITEM-ZBRAZIL_USAGE[1]" name="NEW_ITEM-ZBRAZIL_USAGE[1]" value="" ></td>
+		</tr>
+		<tr>
+			<td>NEW_ITEM-ZBRAZIL_CATEGORY[1]</td>
+			<td><input type="text" id="NEW_ITEM-ZBRAZIL_CATEGORY[1]" name="NEW_ITEM-ZBRAZIL_CATEGORY[1]" value="" ></td>
+		</tr>
+        
+        <tr>
+            <td>NEW_ITEM-ZTAX_CODE[1]</td>
+            <td><input type="text" id="NEW_ITEM-ZTAX_CODE[1]" name="NEW_ITEM-ZTAX_CODE[1]" value="" readonly></td>
+        </tr>
+    </table>
+	</form>
+	
+</body>
 </html>
 
