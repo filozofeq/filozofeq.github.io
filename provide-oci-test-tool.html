@@ -3,20 +3,26 @@
 <head>
 
 	<script type="text/javascript">
-		function updateTargetValue() {
+		
+		function onReportLoad() {
+			const urlParams = new URLSearchParams(window.location.search);
+			var hookURL = urlParams.get("HOOK_URL");
+		
+			if ( !hookURL ) {
+				hookURL = '';
+			};
+			document.getElementById('hookURLInput').value = hookURL;
+		};
+		
+		function updateFormValues() {
 		
 // Get the value of the "action" parameter from the URL
-        const urlParams = new URLSearchParams(window.location.search);
+        
 		const responseForm = document.getElementById("response-form");
 		
 		
 		
-        var hookURL = urlParams.get("HOOK_URL");
-	
-		if ( !hookURL ) {
-			hookURL = '';
-		}
-        responseForm.action = hookURL;
+        responseForm.action = document.getElementById('hookURLInput');
 		responseForm.target = document.getElementById('targetInput').value;
 
 		};
@@ -35,19 +41,23 @@
         }
     </style>
 </head>
-<body>
-    <h1>OCI Response Simulator version 2.0</h1>
+<body onload='onReportLoad();'>
+    <h1>OCI Response Simulator version 2.1</h1>
 	<form target='_self' id="response-form" NAME='response-form' ACTION='' 
-		METHOD='POST' onsubmit='updateTargetValue();'>
+		METHOD='POST' onsubmit='updateFormValues();'>
     <table>
 		<tr>
 			<td style="border:0px;">This page simulates an OCI server response.</td>
 			<td style="border:0px;"><input type='submit' name='submit' value='Submit form' /></td>
 		</tr>
 		<tr>
-			<td style="border:0px;">Form target attribute:</td>
+			<td style="border:0px;">Form target attribute for testing</td>
 			<td style="border:0px;"><input id='targetInput' name='targetInput' value='_self' /></td>
-		</tr
+		</tr>
+		<tr>
+			<td style="border:0px;">HOOK_URL initially read from parameters</td>
+			<td style="border:0px;"><input id='hookURLInput' name='hookURLInput' value='' /></td>
+		</tr>
 		<tr>
 			<td style="border:0px;"/>
 			<td style="border:0px;"/>
