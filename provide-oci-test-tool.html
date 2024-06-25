@@ -7,11 +7,13 @@
 		function onReportLoad() {
 			const urlParams = new URLSearchParams(window.location.search);
 			var hookURL = urlParams.get("HOOK_URL");
+			var returntarget = urlParams.get("returntarget");
 		
 			if ( !hookURL ) {
 				hookURL = '';
 			};
 			document.getElementById('hookURLInput').value = hookURL;
+			document.getElementById('returntargetInput').value = returntarget;
 		};
 		
 		function updateFormValues() {
@@ -19,8 +21,7 @@
 // Get the value of the "action" parameter from the URL
         
 		const responseForm = document.getElementById("response-form");
-		
-		
+
 		
         responseForm.action = document.getElementById('hookURLInput').value;
 		responseForm.target = document.getElementById('targetInput').value;
@@ -42,7 +43,7 @@
     </style>
 </head>
 <body onload='onReportLoad();'>
-    <h1>OCI Response Simulator version 2.2</h1>
+    <h1>OCI Response Simulator version 2.3</h1>
 	<form target='_self' id="response-form" NAME='response-form' ACTION='' 
 		METHOD='POST' onsubmit='updateFormValues();'>
     <table>
@@ -58,6 +59,10 @@
 			<td style="border:0px;">HOOK_URL initially read from parameters</td>
 			<td style="border:0px;"><input id='hookURLInput' name='hookURLInput' value='' /></td>
 		</tr>
+		<tr>
+			<td style="border:0px;">returntarget parameter read from URL:</td>
+			<td style="border:0px;"><input id='returntargetInput' name='returntargetInput' value='' /></td>
+		</tr>		
 		<tr>
 			<td style="border:0px;"/>
 			<td style="border:0px;"/>
